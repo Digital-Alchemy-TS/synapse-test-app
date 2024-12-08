@@ -4,8 +4,14 @@ import dayjs from "dayjs";
 type ControlSensor = { targetTime: string };
 
 export function TimerApp({ synapse, context }: TServiceParams) {
+  const device = synapse.device.register(synapse.device.id("example-timer-app"), {
+    name: "Timer App",
+    sw_version: "4.2.0",
+  });
+
   const timeLeft = synapse.sensor<{ locals: ControlSensor; state: string }>({
     context,
+    device_id: device,
     disabled: ({ locals }) => !locals.targetTime,
     icon: ({ locals }) => (locals.targetTime ? "mdi:cookie-clock" : "mdi:cookie-alert-outline"),
     locals: { targetTime: undefined },
@@ -28,6 +34,7 @@ export function TimerApp({ synapse, context }: TServiceParams) {
   const timer = synapse.number({
     context,
     device_class: "duration",
+    device_id: device,
     name: "Timer",
     native_max_value: 60 * 5,
     native_min_value: 0,
@@ -40,6 +47,7 @@ export function TimerApp({ synapse, context }: TServiceParams) {
 
   synapse.button({
     context,
+    device_id: device,
     name: "Run timer",
     async press() {
       if (active) {
