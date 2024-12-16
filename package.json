@@ -36,7 +36,7 @@
     "ws": "^8.18.0"
   },
   "devDependencies": {
-    "@cspell/eslint-plugin": "^8.16.1",
+    "@cspell/eslint-plugin": "^8.17.1",
     "@digital-alchemy/type-writer": "^24.11.3",
     "@eslint/compat": "^1.2.4",
     "@eslint/eslintrc": "^3.2.0",
